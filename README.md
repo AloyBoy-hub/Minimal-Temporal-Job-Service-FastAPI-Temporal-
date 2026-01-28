@@ -1,6 +1,6 @@
 # Minimal FastAPI + Temporal Integration
 
-This project implements a FastAPI service integrated with Temporal, strictly following the requirements from the provided documentation screenshot.
+This project implements a minimal FastAPI service integrated with Temporal that supports: starting a job, querying job progress via workflow query and demonstrating activity retry after controlled failure.
 
 ## Prerequisites
 
