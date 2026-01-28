@@ -63,7 +63,7 @@ python test_service.py
 - **`workflows.py`**: Orchestrates the business logic, timeouts, and retry policies.
 - **`activities.py`**: Contains the actual unit of work (summing) and handles failures.
 
-## How it Works (Request Lifecycle)
+## How it Works (Lifecycle)
 
 ```mermaid
 sequenceDiagram
