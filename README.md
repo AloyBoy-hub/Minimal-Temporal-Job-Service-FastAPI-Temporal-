@@ -1,4 +1,4 @@
-# Minimal FastAPI + Temporal Integration (Screenshot Specs)
+# Minimal FastAPI + Temporal Integration
 
 This project implements a FastAPI service integrated with Temporal, strictly following the requirements from the provided documentation screenshot.
 
@@ -33,7 +33,7 @@ python worker.py
 uvicorn main:app --reload
 ```
 
-## API Usage (Screenshot Match)
+## API Usage
 
 ### 1. Start a Job
 ```bash
@@ -68,28 +68,28 @@ python test_service.py
 ```mermaid
 sequenceDiagram
     participant User
-    participant FastAPI (main.py)
-    participant Temporal Server
-    participant Worker (worker.py)
-    participant Code (workflows/activities)
+    participant App as FastAPI (main.py)
+    participant Server as Temporal Server
+    participant Worker as Worker (worker.py)
+    participant Logic as Code (workflows/activities)
 
-    User->>FastAPI: POST /jobs
-    FastAPI->>Temporal Server: Schedule Workflow Job
-    Temporal Server-->>FastAPI: job_id
-    FastAPI-->>User: {"job_id": "..."}
+    User->>App: POST /jobs
+    App->>Server: Schedule Workflow Job
+    Server-->>App: job_id
+    App-->>User: {"job_id": "..."}
     
-    Note over Temporal Server, Worker: Job sits in Task Queue
+    Note over Server, Worker: Job sits in Task Queue
     
-    Worker->>Temporal Server: Poll for Tasks
-    Temporal Server->>Worker: Delivery Job Request
-    Worker->>Code: Execute Workflow & Activity
-    Code-->>Worker: Completion Status / Retry
-    Worker->>Temporal Server: Update Job State
+    Worker->>Server: Poll for Tasks
+    Server->>Worker: Delivery Job Request
+    Worker->>Logic: Execute Workflow & Activity
+    Logic-->>Worker: Completion Status / Retry
+    Worker->>Server: Update Job State
     
-    User->>FastAPI: GET /jobs/{id}
-    FastAPI->>Temporal Server: Query Workflow State
-    Temporal Server-->>FastAPI: Current Progress
-    FastAPI-->>User: {"status": "...", "progress": {...}}
+    User->>App: GET /jobs/{id}
+    App->>Server: Query Workflow State
+    Server-->>App: Current Progress
+    App-->>User: {"status": "...", "progress": {...}}
 ```
 
 ## Verification & Logic
